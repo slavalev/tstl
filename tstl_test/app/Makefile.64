@@ -1,0 +1,32 @@
+#################################################################################
+#
+#  Module Name:		Makefile
+#
+#  Author:		Slava I. Levtchenko <slavalev@gmail.com>
+#
+#  Abstract:		Makefile builds TSTL x64 test application
+#
+#  Revision History: 29.07.2002 started
+#					 26.09.2002 released (beta)
+#
+#################################################################################
+
+MODULE = tstl_test64
+MROOT  = app
+COMPILER = MSVC8X64
+TARGET_TYPE = win_cli_app
+
+!include begin.mak
+
+OBJS = $(OBJS)$(MODULE)\\
+MROOT = $(MROOT:\\=\)
+OBJS = $(OBJS:\\=\)
+
+OBJECTS   = $(OBJS)$(PRJ_NAME).obj $(OBJS)sysiolib.obj
+OSLIBLIST = $(LIBTYPELIB) kernel32.lib bufferoverflowu.lib
+# -DUSE_FASTLOCK -DPART_LOCKED_MAP -DUSE_SPINLOCK
+CFLGSRV   = -I$(TSTL) $(CFLGSRV)
+
+all: $(OUT)$(MODULE).exe
+
+!include end.mak
